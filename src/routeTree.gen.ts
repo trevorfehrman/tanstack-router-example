@@ -14,7 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as LoadTodoIndexImport } from './routes/load-todo/index'
 import { Route as LoadTodoShowTodoIndexImport } from './routes/load-todo/show-todo/index'
-import { Route as LoadTodoShowTodoChildRouteIndexImport } from './routes/load-todo/show-todo/child-route/index'
 
 // Create/Update Routes
 
@@ -33,12 +32,6 @@ const LoadTodoShowTodoIndexRoute = LoadTodoShowTodoIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LoadTodoShowTodoChildRouteIndexRoute =
-  LoadTodoShowTodoChildRouteIndexImport.update({
-    path: '/load-todo/show-todo/child-route/',
-    getParentRoute: () => rootRoute,
-  } as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -55,10 +48,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoadTodoShowTodoIndexImport
       parentRoute: typeof rootRoute
     }
-    '/load-todo/show-todo/child-route/': {
-      preLoaderRoute: typeof LoadTodoShowTodoChildRouteIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -68,7 +57,6 @@ export const routeTree = rootRoute.addChildren([
   IndexRoute,
   LoadTodoIndexRoute,
   LoadTodoShowTodoIndexRoute,
-  LoadTodoShowTodoChildRouteIndexRoute,
 ])
 
 /* prettier-ignore-end */

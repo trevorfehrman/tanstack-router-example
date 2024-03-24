@@ -24,7 +24,6 @@ export const router = createRouter({
   defaultPendingComponent: () => <div>Loading...</div>,
   defaultNotFoundComponent: () => <div>Not Found</div>,
   defaultPreloadStaleTime: 0,
-  // defaultPendingMs: 0,
   context: {
     queryClient,
   },

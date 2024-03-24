@@ -1,7 +1,6 @@
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
 import { Link, createFileRoute } from '@tanstack/react-router';
 import { todoSchema } from '../../schemas';
-import { router } from '../../main';
 
 const todoQueryOptions = queryOptions({
   queryKey: ['todo'],
@@ -16,16 +15,8 @@ const todoQueryOptions = queryOptions({
 export const Route = createFileRoute('/load-todo/')({
   component: LoadTodo,
   beforeLoad: () => ({ foo: 'bar' }),
+  // This context correctly has `{foo: string}` merged to it
   loader: ({ context }) => context.queryClient.ensureQueryData(todoQueryOptions),
-  // loader: async ({ context }) => {
-  //   const data = await context.queryClient.ensureQueryData(todoQueryOptions);
-
-  //   router.navigate({
-  //     to: '/load-todo/show-todo/',
-  //     from: Route.fullPath,
-  //     search: prev => ({ ...prev, ...data }),
-  //   });
-  // },
 });
 
 function LoadTodo() {

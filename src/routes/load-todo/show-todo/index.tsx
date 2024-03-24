@@ -1,17 +1,12 @@
-import { createFileRoute, useLoaderData } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { todoSchema } from '../../../schemas';
-import { router } from '../../../main';
-// import { router } from '../../../main';
 
 export const Route = createFileRoute('/load-todo/show-todo/')({
   component: ShowTodo,
   validateSearch: todoSchema,
   loader: ({ context }) => {
+    // Shouldn't this type have `{foo: string}` merged to it?
     console.log(context);
-    // console.log(x, 'from show-todo');
-    // loader: ({context}) => {
-    // context.search.completed
-    // router.navigate({to: '/', from: Route.fullPath, search: (prev) => ({...prev})})
   },
 });
 
