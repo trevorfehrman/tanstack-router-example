@@ -1,36 +1,24 @@
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
-import { Link, createFileRoute } from '@tanstack/react-router';
-import { todoSchema } from '../../schemas';
-
-const todoQueryOptions = queryOptions({
-  queryKey: ['todo'],
-  queryFn: async () => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-    const data = await response.json();
-    const validatedData = todoSchema.parse(data);
-    return validatedData;
-  },
-});
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { Link, createFileRoute, useLoaderData } from '@tanstack/react-router';
+import { todoQueryOptions } from '../../query-options';
 
 export const Route = createFileRoute('/load-todo/')({
   component: LoadTodo,
-  beforeLoad: () => ({ foo: 'bar' }),
-  // This context correctly has `{foo: string}` merged to it
-  loader: ({ context }) => context.queryClient.ensureQueryData(todoQueryOptions),
+  loader: ({ context: { id, completed, title, userId } }) => ({ id, completed, title, userId }),
 });
 
 function LoadTodo() {
   const todo = useSuspenseQuery(todoQueryOptions);
+  const { id, title, completed, userId } = useLoaderData({ from: Route.fullPath });
 
   return (
     <div>
       <h1>Load Todo</h1>
       <h2>{JSON.stringify(todo.data)}</h2>
-      <Link
-        to='/load-todo/show-todo/'
-        from={Route.fullPath}
-        search={prev => ({ ...prev, ...todo.data })}
-      >
+      <h3>
+        ID: {id} Title: {title} Completed: {completed} User ID: {userId}
+      </h3>
+      <Link to='/load-todo/show-todo/' from={Route.fullPath}>
         Show Todo
       </Link>
     </div>

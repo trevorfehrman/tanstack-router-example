@@ -11,11 +11,17 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as LoadTodoRouteImport } from './routes/load-todo/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as LoadTodoIndexImport } from './routes/load-todo/index'
 import { Route as LoadTodoShowTodoIndexImport } from './routes/load-todo/show-todo/index'
 
 // Create/Update Routes
+
+const LoadTodoRouteRoute = LoadTodoRouteImport.update({
+  path: '/load-todo',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -23,13 +29,13 @@ const IndexRoute = IndexImport.update({
 } as any)
 
 const LoadTodoIndexRoute = LoadTodoIndexImport.update({
-  path: '/load-todo/',
-  getParentRoute: () => rootRoute,
+  path: '/',
+  getParentRoute: () => LoadTodoRouteRoute,
 } as any)
 
 const LoadTodoShowTodoIndexRoute = LoadTodoShowTodoIndexImport.update({
-  path: '/load-todo/show-todo/',
-  getParentRoute: () => rootRoute,
+  path: '/show-todo/',
+  getParentRoute: () => LoadTodoRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -40,13 +46,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/load-todo': {
+      preLoaderRoute: typeof LoadTodoRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/load-todo/': {
       preLoaderRoute: typeof LoadTodoIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof LoadTodoRouteImport
     }
     '/load-todo/show-todo/': {
       preLoaderRoute: typeof LoadTodoShowTodoIndexImport
-      parentRoute: typeof rootRoute
+      parentRoute: typeof LoadTodoRouteImport
     }
   }
 }
@@ -55,8 +65,10 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  LoadTodoIndexRoute,
-  LoadTodoShowTodoIndexRoute,
+  LoadTodoRouteRoute.addChildren([
+    LoadTodoIndexRoute,
+    LoadTodoShowTodoIndexRoute,
+  ]),
 ])
 
 /* prettier-ignore-end */

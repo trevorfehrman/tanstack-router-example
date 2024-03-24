@@ -1,21 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { todoSchema } from '../../../schemas';
+import { createFileRoute, useLoaderData } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/load-todo/show-todo/')({
   component: ShowTodo,
-  validateSearch: todoSchema,
-  loader: ({ context }) => {
-    // Shouldn't this type have `{foo: string}` merged to it?
-    console.log(context);
-  },
+  loader: ({ context: { id, completed, title, userId } }) => ({ id, completed, title, userId }),
 });
 
 function ShowTodo() {
-  const search = Route.useSearch();
+  const { id, title, completed, userId } = useLoaderData({ from: '/load-todo/show-todo/' });
+
   return (
     <div>
       <h1>Show Todo</h1>
-      <h2>Search: {JSON.stringify(search)}</h2>
+      <h3>
+        ID: {id} Title: {title} Completed: {completed} User ID: {userId}
+      </h3>
     </div>
   );
 }
