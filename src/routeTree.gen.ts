@@ -14,7 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as LoadTodoRouteImport } from './routes/load-todo/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as LoadTodoIndexImport } from './routes/load-todo/index'
+import { Route as LoadTodoShowTodoRouteImport } from './routes/load-todo/show-todo/route'
+import { Route as LoadTodoOtherPathRouteImport } from './routes/load-todo/other-path/route'
 import { Route as LoadTodoShowTodoIndexImport } from './routes/load-todo/show-todo/index'
+import { Route as LoadTodoOtherPathIndexImport } from './routes/load-todo/other-path/index'
 
 // Create/Update Routes
 
@@ -33,9 +36,24 @@ const LoadTodoIndexRoute = LoadTodoIndexImport.update({
   getParentRoute: () => LoadTodoRouteRoute,
 } as any)
 
-const LoadTodoShowTodoIndexRoute = LoadTodoShowTodoIndexImport.update({
-  path: '/show-todo/',
+const LoadTodoShowTodoRouteRoute = LoadTodoShowTodoRouteImport.update({
+  path: '/show-todo',
   getParentRoute: () => LoadTodoRouteRoute,
+} as any)
+
+const LoadTodoOtherPathRouteRoute = LoadTodoOtherPathRouteImport.update({
+  path: '/other-path',
+  getParentRoute: () => LoadTodoRouteRoute,
+} as any)
+
+const LoadTodoShowTodoIndexRoute = LoadTodoShowTodoIndexImport.update({
+  path: '/',
+  getParentRoute: () => LoadTodoShowTodoRouteRoute,
+} as any)
+
+const LoadTodoOtherPathIndexRoute = LoadTodoOtherPathIndexImport.update({
+  path: '/',
+  getParentRoute: () => LoadTodoOtherPathRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -50,13 +68,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoadTodoRouteImport
       parentRoute: typeof rootRoute
     }
+    '/load-todo/other-path': {
+      preLoaderRoute: typeof LoadTodoOtherPathRouteImport
+      parentRoute: typeof LoadTodoRouteImport
+    }
+    '/load-todo/show-todo': {
+      preLoaderRoute: typeof LoadTodoShowTodoRouteImport
+      parentRoute: typeof LoadTodoRouteImport
+    }
     '/load-todo/': {
       preLoaderRoute: typeof LoadTodoIndexImport
       parentRoute: typeof LoadTodoRouteImport
     }
+    '/load-todo/other-path/': {
+      preLoaderRoute: typeof LoadTodoOtherPathIndexImport
+      parentRoute: typeof LoadTodoOtherPathRouteImport
+    }
     '/load-todo/show-todo/': {
       preLoaderRoute: typeof LoadTodoShowTodoIndexImport
-      parentRoute: typeof LoadTodoRouteImport
+      parentRoute: typeof LoadTodoShowTodoRouteImport
     }
   }
 }
@@ -66,8 +96,9 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
   LoadTodoRouteRoute.addChildren([
+    LoadTodoOtherPathRouteRoute.addChildren([LoadTodoOtherPathIndexRoute]),
+    LoadTodoShowTodoRouteRoute.addChildren([LoadTodoShowTodoIndexRoute]),
     LoadTodoIndexRoute,
-    LoadTodoShowTodoIndexRoute,
   ]),
 ])
 

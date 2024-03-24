@@ -4,7 +4,13 @@ import { todoQueryOptions } from '../../query-options';
 
 export const Route = createFileRoute('/load-todo/')({
   component: LoadTodo,
-  loader: ({ context: { id, completed, title, userId } }) => ({ id, completed, title, userId }),
+  pendingComponent: () => <div>Load Todo Loading...</div>,
+  errorComponent: ({ error }) => (
+    <div>
+      Load Todo Error: <pre>{JSON.stringify(error)}</pre>
+    </div>
+  ),
+  loader: ({ context: { payload } }) => payload,
 });
 
 function LoadTodo() {
@@ -20,6 +26,9 @@ function LoadTodo() {
       </h3>
       <Link to='/load-todo/show-todo/' from={Route.fullPath}>
         Show Todo
+      </Link>
+      <Link to='/load-todo/other-path/' from={Route.fullPath}>
+        Other Path
       </Link>
     </div>
   );
