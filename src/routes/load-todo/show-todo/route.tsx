@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { commentsQueryOptions } from '../../../query-options';
+import { commentsQueryOptions } from './-queries/comments-query-options';
 
 export const Route = createFileRoute('/load-todo/show-todo')({
   beforeLoad: async ({ context }) => {
@@ -13,9 +13,5 @@ export const Route = createFileRoute('/load-todo/show-todo')({
 });
 
 function ShowTodoRoute() {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 }

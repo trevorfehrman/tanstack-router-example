@@ -16,6 +16,11 @@ const queryClient = new QueryClient({
       console.log(data);
     },
   }),
+  defaultOptions: {
+    queries: {
+      throwOnError: true,
+    },
+  },
 });
 
 // Create a new router instance
@@ -23,6 +28,7 @@ export const router = createRouter({
   routeTree,
   defaultPendingComponent: () => <div>Loading...</div>,
   defaultNotFoundComponent: () => <div>Not Found</div>,
+  defaultErrorComponent: () => <div>Default error..</div>,
   defaultPreloadStaleTime: 0,
   context: {
     queryClient,
@@ -33,6 +39,17 @@ export const router = createRouter({
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router;
+  }
+}
+
+interface MyMeta extends Record<string, unknown> {
+  queryMessage: string;
+}
+
+declare module '@tanstack/react-query' {
+  interface Register {
+    queryMeta: MyMeta;
+    mutationMeta: MyMeta;
   }
 }
 
