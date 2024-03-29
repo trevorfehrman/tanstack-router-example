@@ -14,10 +14,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
           Home
         </Link>
         <Link to='/todo' className='[&.active]:font-bold'>
-          Load Todo
+          Tanstack Context Example
         </Link>
         <Link to='/query-params-todo/' className='[&.active]:font-bold'>
           Query Params Example
+        </Link>
+        <Link to='/query-cache-todo' className='[&.active]:font-bold'>
+          Query Cache Example
         </Link>
       </div>
       <hr />
