@@ -1,7 +1,7 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router';
-import { photosQueryOptions } from './-queries/photos-query-options';
+import { photosQueryOptions } from '../../-queries/photos-query-options';
 
-export const Route = createFileRoute('/load-todo/other-path')({
+export const Route = createFileRoute('/todo/pictures')({
   beforeLoad: async ({ context }) => {
     const photos = await context.queryClient.ensureQueryData(photosQueryOptions);
 
@@ -10,9 +10,9 @@ export const Route = createFileRoute('/load-todo/other-path')({
     };
   },
 
-  component: OtherPathRoute,
+  component: PicturesRoute,
 });
 
-function OtherPathRoute() {
+function PicturesRoute() {
   return <Outlet />;
 }

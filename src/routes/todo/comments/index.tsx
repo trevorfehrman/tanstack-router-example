@@ -1,7 +1,7 @@
-import { createFileRoute, useLoaderData } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/load-todo/show-todo/')({
-  component: ShowTodo,
+export const Route = createFileRoute('/todo/comments/')({
+  component: Comments,
   pendingComponent: () => <div>Show Todo Loading...</div>,
   errorComponent: ({ error }) => (
     <div>
@@ -11,11 +11,8 @@ export const Route = createFileRoute('/load-todo/show-todo/')({
   loader: ({ context: { payload } }) => payload,
 });
 
-function ShowTodo() {
-  const { id, title, completed, userId, comments } = useLoaderData({
-    from: Route.fullPath,
-  });
-
+function Comments() {
+  const { id, title, completed, userId, comments } = Route.useLoaderData();
   return (
     <div>
       <h1>Show Todo</h1>
@@ -31,6 +28,9 @@ function ShowTodo() {
           </div>
         ))}
       </div>
+      <Link to='/todo/comments/submit/' from={Route.fullPath}>
+        Submit
+      </Link>
     </div>
   );
 }

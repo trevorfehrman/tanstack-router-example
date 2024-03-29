@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
-import { commentsQueryOptions } from './-queries/comments-query-options';
+import { commentsQueryOptions } from '../../-queries/comments-query-options';
 
-export const Route = createFileRoute('/load-todo/show-todo')({
+export const Route = createFileRoute('/todo/comments')({
   beforeLoad: async ({ context }) => {
     const comments = await context.queryClient.ensureQueryData(commentsQueryOptions);
 
@@ -9,9 +9,9 @@ export const Route = createFileRoute('/load-todo/show-todo')({
       payload: { ...context.payload, comments },
     };
   },
-  component: ShowTodoRoute,
+  component: CommentsRoute,
 });
 
-function ShowTodoRoute() {
+function CommentsRoute() {
   return <Outlet />;
 }

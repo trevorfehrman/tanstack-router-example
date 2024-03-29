@@ -1,15 +1,15 @@
-import { createFileRoute, useLoaderData } from '@tanstack/react-router';
+import { Link, createFileRoute, useLoaderData } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/load-todo/other-path/')({
+export const Route = createFileRoute('/todo/pictures/')({
   loader: ({
     context: {
       payload: { photos },
     },
   }) => ({ photos }),
-  component: OtherPath,
+  component: Pictures,
 });
 
-function OtherPath() {
+function Pictures() {
   const { photos } = useLoaderData({ from: Route.fullPath });
   return (
     <div className='p-2'>
@@ -19,6 +19,9 @@ function OtherPath() {
           <img key={photo.id} src={photo.thumbnailUrl} alt={photo.title} />
         ))}
       </div>
+      <Link to='/todo/pictures/submit' from={Route.fullPath}>
+        Submit
+      </Link>
     </div>
   );
 }

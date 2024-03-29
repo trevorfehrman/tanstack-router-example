@@ -13,8 +13,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         <Link to='/' className='[&.active]:font-bold'>
           Home
         </Link>
-        <Link to='/load-todo' className='[&.active]:font-bold'>
+        <Link to='/todo' className='[&.active]:font-bold'>
           Load Todo
+        </Link>
+        <Link to='/query-params-todo/' className='[&.active]:font-bold'>
+          Query Params Example
         </Link>
       </div>
       <hr />

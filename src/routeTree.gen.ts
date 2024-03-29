@@ -11,18 +11,37 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as LoadTodoRouteImport } from './routes/load-todo/route'
+import { Route as TodoRouteImport } from './routes/todo/route'
+import { Route as QueryParamsTodoRouteImport } from './routes/query-params-todo/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as LoadTodoIndexImport } from './routes/load-todo/index'
-import { Route as LoadTodoShowTodoRouteImport } from './routes/load-todo/show-todo/route'
-import { Route as LoadTodoOtherPathRouteImport } from './routes/load-todo/other-path/route'
-import { Route as LoadTodoShowTodoIndexImport } from './routes/load-todo/show-todo/index'
-import { Route as LoadTodoOtherPathIndexImport } from './routes/load-todo/other-path/index'
+import { Route as TodoIndexImport } from './routes/todo/index'
+import { Route as QueryParamsTodoIndexImport } from './routes/query-params-todo/index'
+import { Route as TodoPicturesRouteImport } from './routes/todo/pictures/route'
+import { Route as TodoCommentsRouteImport } from './routes/todo/comments/route'
+import { Route as QueryParamsTodoPicturesRouteImport } from './routes/query-params-todo/pictures/route'
+import { Route as QueryParamsTodoCommentsRouteImport } from './routes/query-params-todo/comments/route'
+import { Route as TodoPicturesIndexImport } from './routes/todo/pictures/index'
+import { Route as TodoCommentsIndexImport } from './routes/todo/comments/index'
+import { Route as QueryParamsTodoPicturesIndexImport } from './routes/query-params-todo/pictures/index'
+import { Route as QueryParamsTodoCommentsIndexImport } from './routes/query-params-todo/comments/index'
+import { Route as TodoPicturesSubmitRouteImport } from './routes/todo/pictures/submit/route'
+import { Route as TodoCommentsSubmitRouteImport } from './routes/todo/comments/submit/route'
+import { Route as QueryParamsTodoPicturesSubmitRouteImport } from './routes/query-params-todo/pictures/submit/route'
+import { Route as QueryParamsTodoCommentsSubmitRouteImport } from './routes/query-params-todo/comments/submit/route'
+import { Route as TodoPicturesSubmitIndexImport } from './routes/todo/pictures/submit/index'
+import { Route as TodoCommentsSubmitIndexImport } from './routes/todo/comments/submit/index'
+import { Route as QueryParamsTodoPicturesSubmitIndexImport } from './routes/query-params-todo/pictures/submit/index'
+import { Route as QueryParamsTodoCommentsSubmitIndexImport } from './routes/query-params-todo/comments/submit/index'
 
 // Create/Update Routes
 
-const LoadTodoRouteRoute = LoadTodoRouteImport.update({
-  path: '/load-todo',
+const TodoRouteRoute = TodoRouteImport.update({
+  path: '/todo',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const QueryParamsTodoRouteRoute = QueryParamsTodoRouteImport.update({
+  path: '/query-params-todo',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -31,30 +50,103 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LoadTodoIndexRoute = LoadTodoIndexImport.update({
+const TodoIndexRoute = TodoIndexImport.update({
   path: '/',
-  getParentRoute: () => LoadTodoRouteRoute,
+  getParentRoute: () => TodoRouteRoute,
 } as any)
 
-const LoadTodoShowTodoRouteRoute = LoadTodoShowTodoRouteImport.update({
-  path: '/show-todo',
-  getParentRoute: () => LoadTodoRouteRoute,
-} as any)
-
-const LoadTodoOtherPathRouteRoute = LoadTodoOtherPathRouteImport.update({
-  path: '/other-path',
-  getParentRoute: () => LoadTodoRouteRoute,
-} as any)
-
-const LoadTodoShowTodoIndexRoute = LoadTodoShowTodoIndexImport.update({
+const QueryParamsTodoIndexRoute = QueryParamsTodoIndexImport.update({
   path: '/',
-  getParentRoute: () => LoadTodoShowTodoRouteRoute,
+  getParentRoute: () => QueryParamsTodoRouteRoute,
 } as any)
 
-const LoadTodoOtherPathIndexRoute = LoadTodoOtherPathIndexImport.update({
-  path: '/',
-  getParentRoute: () => LoadTodoOtherPathRouteRoute,
+const TodoPicturesRouteRoute = TodoPicturesRouteImport.update({
+  path: '/pictures',
+  getParentRoute: () => TodoRouteRoute,
 } as any)
+
+const TodoCommentsRouteRoute = TodoCommentsRouteImport.update({
+  path: '/comments',
+  getParentRoute: () => TodoRouteRoute,
+} as any)
+
+const QueryParamsTodoPicturesRouteRoute =
+  QueryParamsTodoPicturesRouteImport.update({
+    path: '/pictures',
+    getParentRoute: () => QueryParamsTodoRouteRoute,
+  } as any)
+
+const QueryParamsTodoCommentsRouteRoute =
+  QueryParamsTodoCommentsRouteImport.update({
+    path: '/comments',
+    getParentRoute: () => QueryParamsTodoRouteRoute,
+  } as any)
+
+const TodoPicturesIndexRoute = TodoPicturesIndexImport.update({
+  path: '/',
+  getParentRoute: () => TodoPicturesRouteRoute,
+} as any)
+
+const TodoCommentsIndexRoute = TodoCommentsIndexImport.update({
+  path: '/',
+  getParentRoute: () => TodoCommentsRouteRoute,
+} as any)
+
+const QueryParamsTodoPicturesIndexRoute =
+  QueryParamsTodoPicturesIndexImport.update({
+    path: '/',
+    getParentRoute: () => QueryParamsTodoPicturesRouteRoute,
+  } as any)
+
+const QueryParamsTodoCommentsIndexRoute =
+  QueryParamsTodoCommentsIndexImport.update({
+    path: '/',
+    getParentRoute: () => QueryParamsTodoCommentsRouteRoute,
+  } as any)
+
+const TodoPicturesSubmitRouteRoute = TodoPicturesSubmitRouteImport.update({
+  path: '/submit',
+  getParentRoute: () => TodoPicturesRouteRoute,
+} as any)
+
+const TodoCommentsSubmitRouteRoute = TodoCommentsSubmitRouteImport.update({
+  path: '/submit',
+  getParentRoute: () => TodoCommentsRouteRoute,
+} as any)
+
+const QueryParamsTodoPicturesSubmitRouteRoute =
+  QueryParamsTodoPicturesSubmitRouteImport.update({
+    path: '/submit',
+    getParentRoute: () => QueryParamsTodoPicturesRouteRoute,
+  } as any)
+
+const QueryParamsTodoCommentsSubmitRouteRoute =
+  QueryParamsTodoCommentsSubmitRouteImport.update({
+    path: '/submit',
+    getParentRoute: () => QueryParamsTodoCommentsRouteRoute,
+  } as any)
+
+const TodoPicturesSubmitIndexRoute = TodoPicturesSubmitIndexImport.update({
+  path: '/',
+  getParentRoute: () => TodoPicturesSubmitRouteRoute,
+} as any)
+
+const TodoCommentsSubmitIndexRoute = TodoCommentsSubmitIndexImport.update({
+  path: '/',
+  getParentRoute: () => TodoCommentsSubmitRouteRoute,
+} as any)
+
+const QueryParamsTodoPicturesSubmitIndexRoute =
+  QueryParamsTodoPicturesSubmitIndexImport.update({
+    path: '/',
+    getParentRoute: () => QueryParamsTodoPicturesSubmitRouteRoute,
+  } as any)
+
+const QueryParamsTodoCommentsSubmitIndexRoute =
+  QueryParamsTodoCommentsSubmitIndexImport.update({
+    path: '/',
+    getParentRoute: () => QueryParamsTodoCommentsSubmitRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -64,29 +156,85 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/load-todo': {
-      preLoaderRoute: typeof LoadTodoRouteImport
+    '/query-params-todo': {
+      preLoaderRoute: typeof QueryParamsTodoRouteImport
       parentRoute: typeof rootRoute
     }
-    '/load-todo/other-path': {
-      preLoaderRoute: typeof LoadTodoOtherPathRouteImport
-      parentRoute: typeof LoadTodoRouteImport
+    '/todo': {
+      preLoaderRoute: typeof TodoRouteImport
+      parentRoute: typeof rootRoute
     }
-    '/load-todo/show-todo': {
-      preLoaderRoute: typeof LoadTodoShowTodoRouteImport
-      parentRoute: typeof LoadTodoRouteImport
+    '/query-params-todo/comments': {
+      preLoaderRoute: typeof QueryParamsTodoCommentsRouteImport
+      parentRoute: typeof QueryParamsTodoRouteImport
     }
-    '/load-todo/': {
-      preLoaderRoute: typeof LoadTodoIndexImport
-      parentRoute: typeof LoadTodoRouteImport
+    '/query-params-todo/pictures': {
+      preLoaderRoute: typeof QueryParamsTodoPicturesRouteImport
+      parentRoute: typeof QueryParamsTodoRouteImport
     }
-    '/load-todo/other-path/': {
-      preLoaderRoute: typeof LoadTodoOtherPathIndexImport
-      parentRoute: typeof LoadTodoOtherPathRouteImport
+    '/todo/comments': {
+      preLoaderRoute: typeof TodoCommentsRouteImport
+      parentRoute: typeof TodoRouteImport
     }
-    '/load-todo/show-todo/': {
-      preLoaderRoute: typeof LoadTodoShowTodoIndexImport
-      parentRoute: typeof LoadTodoShowTodoRouteImport
+    '/todo/pictures': {
+      preLoaderRoute: typeof TodoPicturesRouteImport
+      parentRoute: typeof TodoRouteImport
+    }
+    '/query-params-todo/': {
+      preLoaderRoute: typeof QueryParamsTodoIndexImport
+      parentRoute: typeof QueryParamsTodoRouteImport
+    }
+    '/todo/': {
+      preLoaderRoute: typeof TodoIndexImport
+      parentRoute: typeof TodoRouteImport
+    }
+    '/query-params-todo/comments/submit': {
+      preLoaderRoute: typeof QueryParamsTodoCommentsSubmitRouteImport
+      parentRoute: typeof QueryParamsTodoCommentsRouteImport
+    }
+    '/query-params-todo/pictures/submit': {
+      preLoaderRoute: typeof QueryParamsTodoPicturesSubmitRouteImport
+      parentRoute: typeof QueryParamsTodoPicturesRouteImport
+    }
+    '/todo/comments/submit': {
+      preLoaderRoute: typeof TodoCommentsSubmitRouteImport
+      parentRoute: typeof TodoCommentsRouteImport
+    }
+    '/todo/pictures/submit': {
+      preLoaderRoute: typeof TodoPicturesSubmitRouteImport
+      parentRoute: typeof TodoPicturesRouteImport
+    }
+    '/query-params-todo/comments/': {
+      preLoaderRoute: typeof QueryParamsTodoCommentsIndexImport
+      parentRoute: typeof QueryParamsTodoCommentsRouteImport
+    }
+    '/query-params-todo/pictures/': {
+      preLoaderRoute: typeof QueryParamsTodoPicturesIndexImport
+      parentRoute: typeof QueryParamsTodoPicturesRouteImport
+    }
+    '/todo/comments/': {
+      preLoaderRoute: typeof TodoCommentsIndexImport
+      parentRoute: typeof TodoCommentsRouteImport
+    }
+    '/todo/pictures/': {
+      preLoaderRoute: typeof TodoPicturesIndexImport
+      parentRoute: typeof TodoPicturesRouteImport
+    }
+    '/query-params-todo/comments/submit/': {
+      preLoaderRoute: typeof QueryParamsTodoCommentsSubmitIndexImport
+      parentRoute: typeof QueryParamsTodoCommentsSubmitRouteImport
+    }
+    '/query-params-todo/pictures/submit/': {
+      preLoaderRoute: typeof QueryParamsTodoPicturesSubmitIndexImport
+      parentRoute: typeof QueryParamsTodoPicturesSubmitRouteImport
+    }
+    '/todo/comments/submit/': {
+      preLoaderRoute: typeof TodoCommentsSubmitIndexImport
+      parentRoute: typeof TodoCommentsSubmitRouteImport
+    }
+    '/todo/pictures/submit/': {
+      preLoaderRoute: typeof TodoPicturesSubmitIndexImport
+      parentRoute: typeof TodoPicturesSubmitRouteImport
     }
   }
 }
@@ -95,10 +243,31 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  LoadTodoRouteRoute.addChildren([
-    LoadTodoOtherPathRouteRoute.addChildren([LoadTodoOtherPathIndexRoute]),
-    LoadTodoShowTodoRouteRoute.addChildren([LoadTodoShowTodoIndexRoute]),
-    LoadTodoIndexRoute,
+  QueryParamsTodoRouteRoute.addChildren([
+    QueryParamsTodoCommentsRouteRoute.addChildren([
+      QueryParamsTodoCommentsSubmitRouteRoute.addChildren([
+        QueryParamsTodoCommentsSubmitIndexRoute,
+      ]),
+      QueryParamsTodoCommentsIndexRoute,
+    ]),
+    QueryParamsTodoPicturesRouteRoute.addChildren([
+      QueryParamsTodoPicturesSubmitRouteRoute.addChildren([
+        QueryParamsTodoPicturesSubmitIndexRoute,
+      ]),
+      QueryParamsTodoPicturesIndexRoute,
+    ]),
+    QueryParamsTodoIndexRoute,
+  ]),
+  TodoRouteRoute.addChildren([
+    TodoCommentsRouteRoute.addChildren([
+      TodoCommentsSubmitRouteRoute.addChildren([TodoCommentsSubmitIndexRoute]),
+      TodoCommentsIndexRoute,
+    ]),
+    TodoPicturesRouteRoute.addChildren([
+      TodoPicturesSubmitRouteRoute.addChildren([TodoPicturesSubmitIndexRoute]),
+      TodoPicturesIndexRoute,
+    ]),
+    TodoIndexRoute,
   ]),
 ])
 

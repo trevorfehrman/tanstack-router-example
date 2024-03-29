@@ -26,9 +26,9 @@ const queryClient = new QueryClient({
 // Create a new router instance
 export const router = createRouter({
   routeTree,
-  defaultPendingComponent: () => <div>Loading...</div>,
-  defaultNotFoundComponent: () => <div>Not Found</div>,
-  defaultErrorComponent: () => <div>Default error..</div>,
+  defaultPendingComponent: () => <div>Default Loading...</div>,
+  defaultNotFoundComponent: () => <div>Default Not Found</div>,
+  defaultErrorComponent: () => <div>Default error</div>,
   defaultPreloadStaleTime: 0,
   context: {
     queryClient,
@@ -57,7 +57,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} client={queryClient} position='right' />
     </QueryClientProvider>
   </React.StrictMode>
 );
