@@ -8,24 +8,24 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <>
-      <div className='p-2 flex gap-2'>
-        <Link to='/' className='[&.active]:font-bold'>
+    <div className='p-4'>
+      <div className='flex gap-x-5 mb-4'>
+        <Link to='/' className='[&.active]:font-bold hover:underline'>
           Home
         </Link>
-        <Link to='/todo' className='[&.active]:font-bold'>
+        <Link to='/todo' className='[&.active]:font-bold hover:underline'>
           Tanstack Context Example
         </Link>
-        <Link to='/query-params-todo/' className='[&.active]:font-bold'>
+        <Link to='/query-params-todo/' className='[&.active]:font-bold hover:underline'>
           Query Params Example
         </Link>
-        <Link to='/query-cache-todo' className='[&.active]:font-bold'>
+        <Link to='/query-cache-todo' className='[&.active]:font-bold hover:underline'>
           Query Cache Example
         </Link>
       </div>
-      <hr />
+      <hr className='mb-4' />
       <Outlet />
       <TanStackRouterDevtools />
-    </>
+    </div>
   ),
 });

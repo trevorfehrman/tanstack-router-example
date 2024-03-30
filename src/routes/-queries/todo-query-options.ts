@@ -14,7 +14,7 @@ export const todoQueryOptions = queryOptions({
     const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error(`Network response was not ok: ${response.status}`);
     }
 
     const data = await response.json();
@@ -22,6 +22,6 @@ export const todoQueryOptions = queryOptions({
     return validatedData;
   },
   meta: {
-    queryMessage: 'loading todo...',
+    queryMessage: 'Fetch Todo',
   },
 });

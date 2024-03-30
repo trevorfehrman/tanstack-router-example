@@ -15,24 +15,55 @@ function QueryCacheTodoPictures() {
   const photos = photosQuery.data;
 
   return (
-    <div>
+    <div className='flex flex-col gap-y-5'>
       <h1>Query Cache Pictures</h1>
-      <h2>
-        ID: {todo.id} User ID: {todo.userId} Completed: {todo.completed} Title: {todo.title}{' '}
-      </h2>
-      <h2>
+      <h2 className='font-bold'>Todo Data: </h2>
+      <p>
+        <span className='italic'>ID: </span>
+        {todo.id}
+      </p>
+      <p>
+        <span className='italic'>User ID: </span>
+        {todo.userId}
+      </p>
+      <p>
+        <span className='italic'>Completed: </span>
+        {todo.completed ? 'Yes' : 'No'}
+      </p>
+      <p>
+        <span className='italic'>Title: </span>
+        {todo.title}
+      </p>
+
+      <h3 className='font-bold'>Pictures:</h3>
+      <ul className='grid grid-cols-6 gap-8'>
         {photos.map(photo => (
-          <div key={photo.id}>
-            <h3>{photo.id}</h3>
-            <h3>{photo.albumId}</h3>
-            <h3>{photo.title}</h3>
-            <img key={photo.id} src={photo.thumbnailUrl} alt={photo.title} />
-          </div>
+          <li key={photo.id}>
+            <p>
+              <span className='italic'>ID: </span>
+              {photo.id}
+            </p>
+            <p>
+              <span className='italic'>Post ID: </span>
+              {photo.albumId}
+            </p>
+            <p className='truncate'>
+              <span className='italic'>Name: </span>
+              {photo.title}
+            </p>
+            <img src={photo.thumbnailUrl} alt={photo.title} />
+          </li>
         ))}
-      </h2>
-      <Link to='./submit' from={Route.fullPath}>
-        Submit
-      </Link>
+      </ul>
+      <div className='mb-10'>
+        <Link
+          to='./submit'
+          from={Route.fullPath}
+          className='uppercase border rounded p-2 hover:bg-slate-400 transition-all'
+        >
+          Submit
+        </Link>
+      </div>
     </div>
   );
 }

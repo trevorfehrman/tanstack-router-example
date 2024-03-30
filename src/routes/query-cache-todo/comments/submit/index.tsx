@@ -19,7 +19,7 @@ function QueryCacheTodoCommentsSubmit() {
   return (
     <div>
       <h1>Query Cache Todo Comments Submit</h1>
-      <pre>{JSON.stringify(payload)}</pre>
+      <pre>{JSON.stringify(payload, null, 2)}</pre>
     </div>
   );
 }

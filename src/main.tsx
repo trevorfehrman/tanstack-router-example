@@ -7,18 +7,46 @@ import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
+
+type MyQueryMeta = {
+  queryMessage: string;
+};
+
+type MyMutationMeta = {
+  mutationMessage: string;
+};
+
+declare module '@tanstack/react-query' {
+  interface Register {
+    queryMeta: MyQueryMeta;
+    mutationMeta: MyMutationMeta;
+  }
+}
+
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: error => {
-      console.error(error);
+    onError: (error, query) => {
+      console.error(error, query);
     },
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: (data, query) => {
+      console.log(
+        `[SUCCESS] -- ${query.queryHash} -- ${query.meta?.queryMessage} -- ${JSON.stringify(data)}`
+      );
     },
   }),
   defaultOptions: {
     queries: {
       throwOnError: true,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: 0,
     },
   },
 });
@@ -34,24 +62,6 @@ export const router = createRouter({
     queryClient,
   },
 });
-
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-interface MyMeta extends Record<string, unknown> {
-  queryMessage: string;
-}
-
-declare module '@tanstack/react-query' {
-  interface Register {
-    queryMeta: MyMeta;
-    mutationMeta: MyMeta;
-  }
-}
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

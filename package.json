@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.28.9",
-    "@tanstack/react-query-devtools": "^5.28.9",
-    "@tanstack/react-router": "^1.22.3",
+    "@tanstack/react-query-devtools": "^5.28.10",
+    "@tanstack/react-router": "^1.26.0",
     "@tanstack/router-devtools": "^1.22.3",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
