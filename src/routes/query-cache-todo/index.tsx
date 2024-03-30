@@ -9,6 +9,7 @@ function QueryCacheTodo() {
   const ctx = Route.useRouteContext();
   const todoQuery = useSuspenseQuery(ctx.todoQueryOptions);
   const todo = todoQuery.data;
+  const todoError = todoQuery.error;
 
   return (
     <div className='flex flex-col gap-y-5'>
@@ -30,6 +31,11 @@ function QueryCacheTodo() {
         <span className='italic'>Title: </span>
         {todo.title}
       </p>
+      {todoError && (
+        <strong className='text-red-600'>
+          Todo Error! <pre className='text-black'>{todoError.message}</pre>
+        </strong>
+      )}
 
       <div className='flex gap-x-4'>
         <Link
